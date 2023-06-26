@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface UserState {
   Cart: any[];
+  SingleProduct: any;
 }
 
 const initialState: UserState = {
   Cart: [],
+  SingleProduct: null,
 };
 
 const userSlice = createSlice({
@@ -17,6 +19,9 @@ const userSlice = createSlice({
       state.Cart = state.Cart || [];
       state.Cart.push(action.payload);
     },
+    SingleProduct: (state, action: PayloadAction<any>) => {
+      state.SingleProduct = action.payload;
+    },
     DeleteFromCart: (state, action: PayloadAction<any>) => {
       state.Cart = state.Cart || [];
       state.Cart = state.Cart.filter(
@@ -26,6 +31,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { DeleteFromCart, AddToCart } = userSlice.actions;
+export const { DeleteFromCart, AddToCart, SingleProduct } = userSlice.actions;
 
 export default userSlice.reducer;

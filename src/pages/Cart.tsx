@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 const Cart = () => {
   const { Cart } = useSelector((state: any) => state.user);
-  console.log(Cart);
   return (
     <div>
       <h1 className="text-center">Cart-Items</h1>

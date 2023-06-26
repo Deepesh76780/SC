@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { AddToCart, DeleteFromCart } from "../app/cartSlice";
-import { useLocation } from "react-router-dom";
+import { AddToCart, DeleteFromCart, SingleProduct } from "../app/cartSlice";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface Data {
   name: string;
@@ -17,6 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const reserve = localStorage.getItem(item.name);
+  const navigate = useNavigate();
 
   const handleCart = () => {
     dispatch(AddToCart(item));
@@ -27,6 +28,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
     localStorage.removeItem(item.name);
   };
 
+  const handleSingle = () => {
+    dispatch(SingleProduct(item));
+    navigate("/product");
+  };
   return (
     <div
       className="card d-flex flex-column  justify-content-between"
@@ -50,6 +55,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
                 fontStyle: "normal",
                 marginLeft: "5px",
               }}
+              onClick={handleSingle}
             >
               Explore
             </span>
