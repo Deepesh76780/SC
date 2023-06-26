@@ -70,7 +70,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
               </span>
             </a>
           </h5>
-          <p className="card-text">{item.description}</p>
+          {/* <p className="card-text">{item.description}</p> */}
         </div>
         <ul className="list-group list-group-flush">
           <li className="list-group-item">price : ${item.price}</li>
