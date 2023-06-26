@@ -1,20 +1,23 @@
 import ProductCard from "../components/ProductCard";
 import { useSelector } from "react-redux";
-import Products from "../data/Productlist.json";
 
-const AllProduct = () => {
+const Cart = () => {
   const { Cart } = useSelector((state: any) => state.user);
   console.log(Cart);
   return (
     <div>
-      <h1 className="text-center">Products-List</h1>
+      <h1 className="text-center">Cart-Items</h1>
       <div className="container d-flex flex-row mt-5 gap-5 flex-wrap justify-content-center">
-        {Products.map((item, key) => {
-          return <ProductCard key={key} item={item} />;
-        })}
+        {Cart.length ? (
+          Cart.map((item: any, key: any) => {
+            return <ProductCard key={key} item={item} />;
+          })
+        ) : (
+          <p>Cart is Empty</p>
+        )}
       </div>
     </div>
   );
 };
 
-export default AllProduct;
+export default Cart;

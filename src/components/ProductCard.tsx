@@ -1,4 +1,8 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { AddToCart, DeleteFromCart } from "../app/cartSlice";
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
 
 interface Data {
   name: string;
@@ -11,6 +15,20 @@ interface ProductCardProps {
   item: Data;
 }
 const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const reserve = localStorage.getItem(item.name);
+
+  console.log(location.pathname);
+  const handleCart = () => {
+    dispatch(AddToCart(item));
+    localStorage.setItem(item.name, "yes");
+  };
+  const handleDelete = () => {
+    dispatch(DeleteFromCart(item.name));
+    localStorage.removeItem(item.name);
+  };
+
   return (
     <div
       className="card d-flex flex-column  justify-content-between"
@@ -35,9 +53,35 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
         <button type="button" className="btn btn-primary">
           Buy
         </button>
-        <button type="button" className="btn btn-success">
-          Add to Cart
-        </button>
+
+        {location.pathname === "/cart" ? (
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={handleDelete}
+          >
+            delete from cart
+          </button>
+        ) : reserve ? (
+          <button
+            type="button"
+            className="btn btn-success"
+            id={item.name}
+            onClick={handleCart}
+            disabled
+          >
+            Added to Cart
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="btn btn-success"
+            id={item.name}
+            onClick={handleCart}
+          >
+            add to Cart
+          </button>
+        )}
       </div>
     </div>
   );
