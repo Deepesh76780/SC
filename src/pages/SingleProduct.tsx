@@ -17,7 +17,6 @@ const SingleProduct = () => {
     localStorage.removeItem(SingleProduct.name);
   };
 
-  console.log(SingleProduct);
   return (
     <div className="card mb-3 m-auto" style={{ maxWidth: "1000px" }}>
       <div className="row g-0">
@@ -36,15 +35,15 @@ const SingleProduct = () => {
               <small className="text-muted">${SingleProduct.price}</small>
             </p>
           </div>
-          <div className=" d-flex gap-3 m-2" style={{ height: "30px" }}>
-            <button type="button" className="btn btn-primary">
+          <div className=" d-flex gap-3 m-1" style={{ height: "40px" }}>
+            <button type="button" className="btn btn-outline-dark">
               Buy
             </button>
 
             {location.pathname === "/cart" ? (
               <button
                 type="button"
-                className="btn btn-success"
+                className="btn btn-secondary"
                 onClick={handleDelete}
               >
                 delete from cart
@@ -52,7 +51,7 @@ const SingleProduct = () => {
             ) : reserve ? (
               <button
                 type="button"
-                className="btn btn-success"
+                className="btn btn-secondary"
                 id={SingleProduct.name}
                 disabled
               >
@@ -61,7 +60,7 @@ const SingleProduct = () => {
             ) : (
               <button
                 type="button"
-                className="btn btn-success"
+                className="btn btn-secondary"
                 id={SingleProduct.name}
                 onClick={handleCart}
               >

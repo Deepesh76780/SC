@@ -53,7 +53,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
               style={{
                 fontSize: "12px",
                 fontStyle: "normal",
-                marginLeft: "5px",
+                marginLeft: "10px",
               }}
               onClick={handleSingle}
             >
@@ -66,15 +66,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
       <ul className="list-group list-group-flush">
         <li className="list-group-item">price : ${item.price}</li>
       </ul>
-      <div className=" d-flex gap-3 m-2" style={{ height: "30px" }}>
-        <button type="button" className="btn btn-primary">
+      <div className=" d-flex gap-3 m-1" style={{ height: "40px" }}>
+        <button type="button" className="btn btn-outline-dark">
           Buy
         </button>
-
         {location.pathname === "/cart" ? (
           <button
             type="button"
-            className="btn btn-success"
+            className="btn btn-secondary"
             onClick={handleDelete}
           >
             delete from cart
@@ -82,7 +81,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
         ) : reserve ? (
           <button
             type="button"
-            className="btn btn-success"
+            className="btn btn-secondary"
             id={item.name}
             disabled
           >
@@ -91,7 +90,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
         ) : (
           <button
             type="button"
-            className="btn btn-success"
+            className="btn btn-secondary"
             id={item.name}
             onClick={handleCart}
           >

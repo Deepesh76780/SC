@@ -20,8 +20,23 @@ const AllProduct = () => {
 
   return (
     <div>
-      <h1 className="text-center">Products-List</h1>
-      <div className="container d-flex flex-row mt-5 gap-5 flex-wrap justify-content-center">
+      <div className="jumbotron">
+        <div className="container mb-5">
+          <h1 className="display-3" style={{ letterSpacing: "1px" }}>
+            V-SHOP
+          </h1>
+          <p>
+            VShop is your ultimate destination to procure the most cutting-edge
+            gadgets available in the market.
+          </p>
+          <p>
+            <a className="btn btn-primary btn-lg" href="#" role="button">
+              Learn more »
+            </a>
+          </p>
+        </div>
+      </div>
+      <div className="container d-flex flex-row  gap-5 flex-wrap justify-content-center">
         {Products.map((item: any, key: any) => {
           return <ProductCard key={key} item={item} />;
         })}
