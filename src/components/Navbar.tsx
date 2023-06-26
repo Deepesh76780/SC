@@ -8,7 +8,7 @@ function OffcanvasExample() {
   const { Cart } = useSelector((state: any) => state.user);
   return (
     <>
-      {[false].map((expand, key) => (
+      {["sm"].map((expand, key) => (
         <Navbar key={key} expand={expand} className="bg-dark navbar-dark mb-3 ">
           <Container fluid>
             <Navbar.Brand href="#">V - shop</Navbar.Brand>
