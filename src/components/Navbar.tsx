@@ -1,52 +1,53 @@
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import Offcanvas from "react-bootstrap/Offcanvas";
 import { useSelector } from "react-redux";
 
-const Navbar = () => {
+function OffcanvasExample() {
   const { Cart } = useSelector((state: any) => state.user);
-
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark p-2  sticky-top">
-      <a className="navbar-brand" href="/">
-        V-shop
-      </a>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav">
-          <li className="nav-item active">
-            <a className="nav-link" href="/">
-              Home
-              {/* <span className="sr-only">(current)</span> */}
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/cart">
-              Cart
-              <span
-                style={{
-                  borderRadius: "30%",
-                  marginLeft: "10px",
-                  backgroundColor: "white",
-                  color: "black",
-                  padding: "3px",
-                }}
-              >
-                {Cart.length}
-              </span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <>
+      {[false].map((expand, key) => (
+        <Navbar key={key} expand={expand} className="bg-dark navbar-dark mb-3 ">
+          <Container fluid>
+            <Navbar.Brand href="#">V - shop</Navbar.Brand>
+            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
+            <Navbar.Offcanvas
+              id={`offcanvasNavbar-expand-${expand}`}
+              aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+              placement="end"
+            >
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                  shop now
+                </Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+                <Nav className="justify-content-end flex-grow-1 pe-3">
+                  <Nav.Link href="/">Home</Nav.Link>
+                  <Nav.Link href="/cart">
+                    Cart{" "}
+                    <span
+                      style={{
+                        borderRadius: "50%",
+                        marginLeft: "5px",
+                        backgroundColor: "black",
+                        color: "white",
+                        padding: "5px",
+                      }}
+                    >
+                      {Cart.length}
+                    </span>
+                  </Nav.Link>
+                </Nav>
+              </Offcanvas.Body>
+            </Navbar.Offcanvas>
+          </Container>
+        </Navbar>
+      ))}
+    </>
   );
-};
+}
 
-export default Navbar;
+export default OffcanvasExample;
