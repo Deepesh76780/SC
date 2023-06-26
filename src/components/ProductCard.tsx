@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { AddToCart, DeleteFromCart, SingleProduct } from "../app/cartSlice";
+import {
+  AddToCart,
+  DeleteFromCart,
+  SingleProduct,
+  QuantityIncrement,
+  QuantityDecrement,
+} from "../app/cartSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Toast } from "react-bootstrap";
 
@@ -9,6 +15,7 @@ interface Data {
   image_url: string;
   description: string;
   price: number;
+  quantity?: number;
 }
 interface ProductCardProps {
   key: number;
@@ -22,8 +29,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
   const navigate = useNavigate();
 
   const handleCart = () => {
-    dispatch(AddToCart(item));
-    localStorage.setItem(item.name, "yes");
+    const Item = {
+      name: item.name,
+      image_url: item.image_url,
+      description: item.description,
+      price: item.price,
+      quantity: 1,
+    };
+    dispatch(AddToCart(Item));
+    localStorage.setItem(item.name, "1");
   };
   const handleDelete = () => {
     dispatch(DeleteFromCart(item.name));
@@ -33,6 +47,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
   const handleSingle = () => {
     dispatch(SingleProduct(item));
     navigate("/product");
+  };
+
+  const handleDecrement = () => {
+    dispatch(QuantityDecrement(item.name));
+  };
+  const handleIncrement = () => {
+    dispatch(QuantityIncrement(item.name));
   };
   return (
     <>
@@ -73,7 +94,36 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
           {/* <p className="card-text">{item.description}</p> */}
         </div>
         <ul className="list-group list-group-flush">
-          <li className="list-group-item">price : ${item.price}</li>
+          {location.pathname === "/" ? (
+            <li className="list-group-item">price : ${item.price}</li>
+          ) : (
+            <>
+              <li className="list-group-item">
+                {item.quantity && `price : ${item.price * item.quantity}`}
+              </li>
+              <li className="list-group-item d-flex justify-content-between">
+                Quantity: {item.quantity}
+                <span className="d-flex flex-row gap-4">
+                  <span
+                    onClick={handleDecrement}
+                    style={{
+                      cursor: "pointer",
+                    }}
+                  >
+                    -
+                  </span>
+                  <span
+                    onClick={handleIncrement}
+                    style={{
+                      cursor: "pointer",
+                    }}
+                  >
+                    +
+                  </span>
+                </span>
+              </li>
+            </>
+          )}
         </ul>
         <div className=" d-flex gap-3 m-1" style={{ height: "40px" }}>
           <button

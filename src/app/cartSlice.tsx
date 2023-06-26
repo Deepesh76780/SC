@@ -15,12 +15,25 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     AddToCart: (state, action: PayloadAction<any>) => {
-      console.log(action.payload);
       state.Cart = state.Cart || [];
       state.Cart.push(action.payload);
     },
     SingleProduct: (state, action: PayloadAction<any>) => {
       state.SingleProduct = action.payload;
+    },
+    QuantityIncrement: (state, action: PayloadAction<any>) => {
+      const item = state.Cart.find((item) => item.name === action.payload);
+
+      if (item) {
+        item.quantity += 1;
+      }
+    },
+    QuantityDecrement: (state, action: PayloadAction<any>) => {
+      const item = state.Cart.find((item) => item.name === action.payload);
+      if (item.quantity === 1) return;
+      if (item) {
+        item.quantity -= 1;
+      }
     },
     DeleteFromCart: (state, action: PayloadAction<any>) => {
       state.Cart = state.Cart || [];
@@ -31,6 +44,12 @@ const userSlice = createSlice({
   },
 });
 
-export const { DeleteFromCart, AddToCart, SingleProduct } = userSlice.actions;
+export const {
+  DeleteFromCart,
+  AddToCart,
+  SingleProduct,
+  QuantityIncrement,
+  QuantityDecrement,
+} = userSlice.actions;
 
 export default userSlice.reducer;
