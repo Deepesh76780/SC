@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Cart from "./pages/Cart";
 
 function App() {
+  const pat = "https://main--capable-narwhal-aefc4d.netlify.app/cart";
   return (
     <>
       <Navbar />
@@ -12,7 +13,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<AllProduct />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route path={pat} element={<Cart />} />
           </Routes>
         </BrowserRouter>
       </div>
