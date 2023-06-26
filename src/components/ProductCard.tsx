@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { AddToCart, DeleteFromCart } from "../app/cartSlice";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
 
 interface Data {
   name: string;
@@ -19,7 +18,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
   const location = useLocation();
   const reserve = localStorage.getItem(item.name);
 
-  console.log(location.pathname);
   const handleCart = () => {
     dispatch(AddToCart(item));
     localStorage.setItem(item.name, "yes");
@@ -35,7 +33,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
       style={{ width: "18rem" }}
     >
       <img
-        className="img-fluid mt-5"
+        className="card-img-top"
         height={400}
         width={400}
         src={item.image_url}
@@ -43,7 +41,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
       />
 
       <div className="container mt-5">
-        <h5 className="card-title">{item.name}</h5>
+        <h5 className="card-title">
+          {item.name}
+          <a href="">
+            <span
+              style={{
+                fontSize: "12px",
+                fontStyle: "normal",
+                marginLeft: "5px",
+              }}
+            >
+              Explore
+            </span>
+          </a>
+        </h5>
         <p className="card-text">{item.description}</p>
       </div>
       <ul className="list-group list-group-flush">
@@ -67,7 +78,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
             type="button"
             className="btn btn-success"
             id={item.name}
-            onClick={handleCart}
             disabled
           >
             Added to Cart
