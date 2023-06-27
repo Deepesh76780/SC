@@ -12,8 +12,15 @@ const SingleProduct = () => {
   const reserve = localStorage.getItem(SingleProduct.name);
 
   const handleCart = () => {
-    dispatch(AddToCart(SingleProduct));
-    localStorage.setItem(SingleProduct.name, "yes");
+    const Item = {
+      name: SingleProduct.name,
+      image_url: SingleProduct.image_url,
+      description: SingleProduct.description,
+      price: SingleProduct.price,
+      quantity: 1,
+    };
+    dispatch(AddToCart(Item));
+    localStorage.setItem(SingleProduct.name, "1");
   };
   const handleDelete = () => {
     dispatch(DeleteFromCart(SingleProduct.name));
